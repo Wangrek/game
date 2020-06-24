@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+<p>
+	<% if @play.image.attached? %>
+		<image src="<%=(url_for(@play.image))%>" width="50" height="60">
+	<% end %>
+</p>		
+<p>
+  <strong>Timer:</strong>
+  <%= @play.timer %>
+</p>
+
+<%= link_to 'Edit', edit_play_path(@play) %> |
+<%= link_to 'Back', plays_path %>

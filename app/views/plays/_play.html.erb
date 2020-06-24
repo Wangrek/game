@@ -1,0 +1,8 @@
+<tr>
+  <td><%= play.timer %></td>
+  <td>
+    <% if play.image.attached? %>
+      <image src="<%=(url_for(play.image))%>" width="50" height="60">
+    <% end %>
+  </td>
+</tr>

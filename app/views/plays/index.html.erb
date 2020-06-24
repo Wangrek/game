@@ -1,0 +1,77 @@
+<div class="container mt-3 text-center">
+  <div>
+    <h1 id="timer">Let's go to Play</h1>
+  </div>
+  <div> 
+    <h1 id="countdown"></h1>
+  </div>
+  <img id="img" src="" width="100" height="100"/>
+  <br><br>
+  <div class="row">
+    <div class="col-md-12">
+      <%= submit_tag("Click", class: "btn btn-primary", :onclick => "sendValues();") %>
+    </div>
+  </div>
+  <br><br><br>
+  <div>
+    <table class="table table-striped" id="games">
+      <thead class="thead-dark">
+        <tr>
+          <th class="text-center">Timer</th>
+          <th class="text-center">Image</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render @plays %> 
+      </tbody>
+    </table>
+  </div>
+  <div class="pull-right">
+    <%= link_to "Home", root_path, :class=> "btn btn-success" %>
+  </div>
+  <br><br><br>
+</div>
+<script type = "text/javascript">
+  var timeleft = 10;
+  var time, y;
+  var images, x = 0;
+  var images = [<%= raw @arr_img_url.to_json %>];
+  var len = images[0].length
+  var downloadTimer = setInterval(function(){
+    document.getElementById("img").src = images[0][x];
+    document.getElementById("countdown").innerHTML = 'Counter: ' + timeleft;
+    if(timeleft == 1) {
+      timeleft = 11;
+    }
+
+    if(x == len-1) {
+      x = -1;
+    }
+
+    timeleft -= 1;
+    x += 1;
+
+  }, 1000);
+
+  function sendValues() {
+    if (timeleft == 10) {
+      time = 1
+    } else {
+      time = timeleft + 1
+    }
+    if (x == 0) {
+      y = len-1
+    } else {
+      y = x-1
+    }
+    jQuery.ajax({
+      url: "/plays/create",
+      type: 'post',
+      dataType: 'json',
+      data: { timer: time, image : images[0][y] },
+      success: function(html) {
+        $('#games').append("<tr><td>" + html.timer + "</td><td><image src=" + images[0][y] + " width='50' height='50'></td></tr>");; 
+      }
+    });
+  } 
+</script>
