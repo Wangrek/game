@@ -1,24 +1,16 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Ruby version: 2.5.0p0
+* Rails version: 5.2.4.3 
 
-Things you may want to cover:
++ If the data base is not created run:
+    ##### rake db:create
+    ##### rake db:migrate
 
-* Ruby version
++ Install dependencies run:
+    ##### bundle install
 
-* System dependencies
++ Start the server and run the application:
+    ##### rails s
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Open your browser on http://localhost:3000/
